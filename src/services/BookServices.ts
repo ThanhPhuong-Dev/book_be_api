@@ -19,6 +19,20 @@ export class BookServices {
       throw error;
     }
   }
+
+  async search(filter: string) {
+    try {
+      const text = await store.book().search(filter);
+
+      return {
+        status: "OK",
+        data: text,
+      };
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
   async itemBased(limit: number, page: number, data: string[]) {
     try {
       const text = await store.book().itemBased(limit, page, data);

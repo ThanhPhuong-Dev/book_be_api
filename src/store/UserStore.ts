@@ -31,4 +31,17 @@ export class UserStore {
   async getUserAll() {
     return this.collection?.find({}).toArray();
   }
+
+  async update(userId: string, data: any) {
+    return this.collection?.updateOne(
+      { _id: new ObjectId(userId) },
+      {
+        $set: data,
+      }
+    );
+  }
+
+  async delete(userId: string) {
+    return this.collection?.findOneAndDelete({ _id: new ObjectId(userId) });
+  }
 }

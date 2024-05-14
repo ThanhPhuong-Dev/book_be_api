@@ -2,10 +2,12 @@ import { Db, MongoClient } from "mongodb";
 import { EnvConfig } from "./envConfig";
 import { UserStore } from "../store/UserStore";
 import { BookStore } from "../store/BookStore";
+import { OrderStore } from "../store/OrderStore";
 
 interface Store {
   user: UserStore;
   book: BookStore;
+  order: OrderStore;
 }
 
 class MongoConnection {
@@ -34,6 +36,7 @@ class MongoConnection {
         this.store = {
           user: new UserStore(this.db),
           book: new BookStore(this.db),
+          order: new OrderStore(this.db),
         };
       } catch (error) {
         console.log("Lỗi Kết Nối", error);
@@ -53,6 +56,13 @@ class MongoConnection {
       throw Error("Book store not defind");
     }
     return this.store?.book;
+  }
+
+  order() {
+    if (!this.store?.order) {
+      throw Error("order store not defind");
+    }
+    return this.store?.order;
   }
 }
 

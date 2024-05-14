@@ -25,6 +25,20 @@ class BookControllers {
       console.log("ERROR", error);
     }
   }
+
+  async search(req: Request, res: Response) {
+    try {
+      console.log("fwfwfw", req.query);
+      const { filter } = req.query;
+
+      const resv = await bookServices.search(filter as any);
+
+      return res.status(200).json(resv);
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  }
+
   async itemBased(req: Request, res: Response) {
     try {
       const { limit, page } = req.query;
@@ -115,6 +129,7 @@ class BookControllers {
     try {
       const { ISBN, bookTitle, bookAuthor, yearPublication, Publisher, image } =
         req.body;
+
       if (
         !ISBN ||
         !bookTitle ||

@@ -6,7 +6,7 @@ export const generalAccessToken = (payload: any): string => {
       ...payload,
     },
     "access_token",
-    { expiresIn: "12h" }
+    { expiresIn: "24h" }
   );
   return access_token;
 };

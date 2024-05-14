@@ -95,4 +95,45 @@ export class UserServices {
       console.log("Error", error);
     }
   }
+
+  async updateUser(userID: string, data: any) {
+    try {
+      const isUserId = await store.user().checkUserId(userID);
+      if (isUserId === null) {
+        return {
+          status: "ERR",
+          message: "Người dùng không tồn tại",
+        };
+      }
+
+      const user = await store.user().update(userID, data);
+      return {
+        status: "OK",
+        message: "Thành công",
+        data: user,
+      };
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  }
+
+  async deleteUser(userID: string) {
+    try {
+      const checkUser = await store.user().delete(userID);
+      if (checkUser === null) {
+        return {
+          status: "Ok",
+          message: "the user is not defined",
+        };
+      }
+      if (checkUser) {
+        return {
+          status: "OK",
+          message: "Remove Success",
+        };
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
 }

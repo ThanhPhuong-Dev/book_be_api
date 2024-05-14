@@ -16,6 +16,13 @@ export class BookStore {
       .toArray();
   }
 
+  async search(data: string) {
+    return this.collection
+      ?.find({
+        "Book-Title": { $regex: data },
+      })
+      .toArray();
+  }
   async totalCount() {
     return this.collection?.countDocuments();
   }
