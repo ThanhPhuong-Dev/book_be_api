@@ -14,11 +14,19 @@ export class UserServices {
           message: "Email này đã tồn tại",
         };
       }
-      const hashPassword = bcrypt.hashSync(data.password, 10);
 
-      const newUser = await store
-        .user()
-        .create({ ...data, password: hashPassword });
+      const hashPassword = bcrypt.hashSync(data.password, 10);
+      const userMax = await store.userData().max();
+
+      const userIdMax = (userMax as any)["User-ID"];
+      await store.userData().add({
+        "User-ID": Number(userIdMax + 1),
+      });
+      const newUser = await store.user().create({
+        ...data,
+        password: hashPassword,
+        userId: Number(userIdMax + 1),
+      });
       return {
         status: "OK",
         message: "Tạo tài khoản thành công",
@@ -84,7 +92,6 @@ export class UserServices {
 
   async getUserAll() {
     try {
-      console.log("phuong");
       const dataUser = await store.user().getUserAll();
       return {
         status: "OK",
