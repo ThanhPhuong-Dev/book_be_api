@@ -11,6 +11,7 @@ export class UserModel {
     this.isAdmin = data.isAdmin || false;
     this.password = data.password;
     this.address = data.address;
-    this.userId = data.userId || 12444;
+    this.userId = data.userId;
+    // this.userId = data.userId || Math.floor(Math.random() * 10000);
   }
 }

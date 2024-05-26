@@ -68,7 +68,7 @@ export class BookStore {
     return await this.collection?.distinct("Year-Of-Publication");
   }
 
-  async IsISBN(isbn: number) {
+  async IsISBN(isbn: string) {
     return await this.collection?.findOne({
       ISBN: isbn,
     });

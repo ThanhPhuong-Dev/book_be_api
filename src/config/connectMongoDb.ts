@@ -3,11 +3,15 @@ import { EnvConfig } from "./envConfig";
 import { UserStore } from "../store/UserStore";
 import { BookStore } from "../store/BookStore";
 import { OrderStore } from "../store/OrderStore";
+import { RatingStore } from "../store/RatingStore";
+import { UserDataStore } from "../store/UserDataStore";
 
 interface Store {
   user: UserStore;
   book: BookStore;
   order: OrderStore;
+  rating: RatingStore;
+  userData: UserDataStore;
 }
 
 class MongoConnection {
@@ -37,6 +41,8 @@ class MongoConnection {
           user: new UserStore(this.db),
           book: new BookStore(this.db),
           order: new OrderStore(this.db),
+          rating: new RatingStore(this.db),
+          userData: new UserDataStore(this.db),
         };
       } catch (error) {
         console.log("Lỗi Kết Nối", error);
@@ -63,6 +69,20 @@ class MongoConnection {
       throw Error("order store not defind");
     }
     return this.store?.order;
+  }
+
+  rating() {
+    if (!this.store?.rating) {
+      throw Error("rating store not defind");
+    }
+    return this.store?.rating;
+  }
+
+  userData() {
+    if (!this.store?.userData) {
+      throw Error("userData store not defind");
+    }
+    return this.store?.userData;
   }
 }
 

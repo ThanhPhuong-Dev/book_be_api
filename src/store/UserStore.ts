@@ -1,5 +1,6 @@
 import { Collection, Db, ObjectId } from "mongodb";
 import { IUser } from "../interface/IUser";
+import { UserModel } from "../model/UserModel";
 
 export class UserStore {
   public collection?: Collection<Document>;
@@ -7,7 +8,7 @@ export class UserStore {
     this.collection = db.collection("users");
   }
 
-  async create(data: Partial<IUser>) {
+  async create(data: Partial<UserModel>) {
     return this.collection?.insertOne(data as Document);
   }
 

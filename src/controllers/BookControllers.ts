@@ -28,7 +28,6 @@ class BookControllers {
 
   async search(req: Request, res: Response) {
     try {
-      console.log("fwfwfw", req.query);
       const { filter } = req.query;
 
       const resv = await bookServices.search(filter as any);

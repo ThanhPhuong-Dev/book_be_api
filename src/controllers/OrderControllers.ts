@@ -6,7 +6,6 @@ export class OrderControllers {
   async buyBook(req: Request, res: Response) {
     try {
       const data = req.body;
-      console.log("data", data);
 
       const resv = await orderService.buyBook(data);
       return res.status(200).json(resv);

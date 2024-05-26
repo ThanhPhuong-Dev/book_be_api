@@ -1,5 +1,5 @@
 export class BookModel {
-  ISBN: number;
+  ISBN: string;
   bookTitle: string;
   bookAuthor: string;
   yearPublication: number;

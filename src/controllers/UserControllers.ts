@@ -9,7 +9,6 @@ class UserControllers {
   async createUser(req: Request, res: Response) {
     try {
       const { name, email, password, confirmPassword } = req.body;
-      console.log(req.body);
 
       if (!email || !password || !confirmPassword) {
         return res.status(400).json({
@@ -44,8 +43,6 @@ class UserControllers {
 
   async login(req: Request, res: Response) {
     try {
-      console.log("chay dc");
-
       const { email, password } = req.body;
 
       if (!email || !password) {
