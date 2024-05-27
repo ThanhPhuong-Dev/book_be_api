@@ -10,4 +10,8 @@ export const EnvConfig: IEnvConfig = {
     access_token: process.env.ACCESS_TOKEN || "",
     refresh_token: process.env.REFRESH_TOKEN || "",
   },
+  nodemailer: {
+    email: process.env.EMAIL_ACCOUNT || "",
+    password: process.env.EMAIL_PASSWORD || "",
+  },
 };

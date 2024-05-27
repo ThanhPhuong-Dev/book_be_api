@@ -1,14 +1,18 @@
 import { store } from "../config/connectMongoDb";
+import { sendEmailCreateOrder } from "../utils/EmailService";
 
 export class OrderServices {
   async buyBook(data: any) {
     try {
+      const { email, orderItems } = data;
       const text = await store.order().buy(data);
-
-      return {
-        status: "OK",
-        data: text,
-      };
+      if (text) {
+        await sendEmailCreateOrder(email, orderItems);
+        return {
+          status: "OK",
+          data: text,
+        };
+      }
     } catch (error) {
       console.log(error);
       throw error;
