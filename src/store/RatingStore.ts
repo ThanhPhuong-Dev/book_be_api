@@ -17,13 +17,21 @@ export class RatingStore {
     });
   }
 
-  async update(ISBN: string, data: any) {
+  async isUserAndBook(ISBN: string, userID: number) {
+    return this.collection?.findOne({
+      "User-ID": userID,
+      ISBN: ISBN,
+    });
+  }
+
+  async update(ISBN: string, userID: number, rating: number) {
     return this.collection?.updateOne(
       {
+        "User-ID": userID,
         ISBN: ISBN,
       },
       {
-        $set: data,
+        $set: { "Book-Rating": rating },
       }
     );
   }

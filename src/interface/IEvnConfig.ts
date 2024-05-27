@@ -7,4 +7,9 @@ export interface IEnvConfig {
     access_token: string;
     refresh_token: string;
   };
+
+  nodemailer: {
+    email: string;
+    password: string;
+  };
 }
